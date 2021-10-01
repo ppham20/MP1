@@ -3,7 +3,13 @@ package cpen221.mp1;
 import cpen221.mp1.exceptions.NoSuitableSentenceException;
 import cpen221.mp1.sentiments.SentimentAnalysis;
 
+import javax.swing.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.*;
 
 public class Document {
 
@@ -16,7 +22,16 @@ public class Document {
      * @param docURL the URL with the contents of the document
      */
     public Document(String docId, URL docURL) {
-        // TODO: Implement this constructor
+        try {
+            Scanner urlScanner = new Scanner(docURL.openStream());
+            StringBuilder fileText = new StringBuilder();
+            while (urlScanner.hasNext()) {
+                fileText.append(urlScanner.next());
+            }
+            System.out.println(fileText);
+        } catch (IOException ioe) {
+            System.out.println("Problem reading from URL.");
+        }
     }
 
     /**
@@ -26,7 +41,18 @@ public class Document {
      *                 the document
      */
     public Document(String docId, String fileName) {
-        // TODO: Implement this constructor
+        try {
+            StringBuilder fileText = new StringBuilder();
+            BufferedReader reader = new BufferedReader(new FileReader(fileName));
+            for (String fileLine = reader.readLine(); fileLine!= null; fileLine = reader.readLine()) {
+                fileText.append(fileLine);
+            }
+            reader.close();
+            System.out.println(fileText);
+        }
+        catch (IOException ioe) {
+            System.out.println("Problem reading file.");
+        }
     }
 
     /**
@@ -34,35 +60,19 @@ public class Document {
      * @return the identifier for this document
      */
     public String getDocId() {
-        // TODO: Implement this method
+
         return null;
     }
 
     /* ------- Task 1 ------- */
-
-    public double averageWordLength() {
-        // TODO: Implement this method
-        return 0.0;
-    }
-
-    public double uniqueWordRatio() {
-        // TODO: Implement this method
-        return 0.0;
-    }
-
-    public double hapaxLegomanaRatio() {
-        // TODO: Implement this method
-        return 0.0;
-    }
-
-    /* ------- Task 2 ------- */
 
     /**
      * Obtain the number of sentences in the document
      * @return the number of sentences in the document
      */
     public int numSentences() {
-        // TODO: Implement this method
+
+
         return 0;
     }
 
@@ -88,6 +98,24 @@ public class Document {
         // TODO: Implement this method
         return 0.0;
     }
+
+    /* ------- Task 2 ------- */
+
+    public double averageWordLength() {
+
+        return 0.0;
+    }
+
+    public double uniqueWordRatio() {
+        // TODO: Implement this method
+        return 0.0;
+    }
+
+    public double hapaxLegomanaRatio() {
+        // TODO: Implement this method
+        return 0.0;
+    }
+
 
     /* ------- Task 3 ------- */
 
